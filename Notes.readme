@@ -1,0 +1,19 @@
+In Java, the public static void main(String[] args) method is the entry point of any standalone Java application. Each keyword in this method has a specific role:
+
+public: This is an access modifier. It means that the method is accessible from anywhere, allowing the Java runtime to call this method from outside the class.
+
+static: This means that the method belongs to the class rather than an instance of the class. It can be called without creating an object of the class. The Java runtime environment needs to call the main method without creating an object, so it must be static.
+
+void: This indicates that the method does not return any value. The main method is just supposed to run the application and doesn’t return anything to the caller.
+
+main: This is the name of the method. It is the entry point for the application. When you run a Java program, the runtime environment looks for this method signature to start the execution.
+
+String[] args: This is the parameter passed to the main method. It's an array of String objects that can hold command-line arguments passed when running the program.
+
+Together, this method signature tells the Java runtime how to start your program and what initial setup it needs to do so.
+
+
+
+
+
+
