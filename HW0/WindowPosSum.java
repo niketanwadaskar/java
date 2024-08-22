@@ -1,14 +1,13 @@
 public class WindowPosSum {
 
     public static int[] winPosSum(int[] a, int n) {
-        // {4, 8, -3, 13, 9, 4}
-
         for (int j = 0; j < a.length; j++) {
-            if (a[j] > 0) {
-                for (int i = 1; i <= n && j + i < a.length; i++) {
-                    a[j] = a[j] + a[j + i];
-                }
+            if (a[j] < 0)
+                continue;
+            for (int i = 1; i <= n && j + i < a.length; i++) {
+                a[j] = a[j] + a[j + i];
             }
+
         }
         return a;
     }
@@ -23,3 +22,8 @@ public class WindowPosSum {
         }
     }
 }
+
+/*
+ * {4, 8, -3, 13, 9, 4} for n = 3
+ * 
+ */
