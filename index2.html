@@ -398,7 +398,7 @@
 
       function calculateGangSheet() {
         let totalHeight = 0;
-        const gap = 0.2;
+        const gap = 1.0 ;
         const designGroups = document.querySelectorAll(".design-group");
 
         designGroups.forEach((group, index) => {
@@ -440,55 +440,7 @@
         document.getElementById("total-result").innerText = resultText;
       }
 
-     /* function calculateGangSheet() {
-        let totalHeight = 0;
-        const gap = 0.2;
-        const maxWidth = 24; // Updated to 24 inches
-        const maxHeight = 24; // Added max height
-        const designGroups = document.querySelectorAll(".design-group");
-
-        designGroups.forEach((group, index) => {
-          const i = parseInt(group.id.split("-")[2]);
-          const width = parseFloat(document.getElementById(`width-${i}`).value);
-          const height = parseFloat(
-            document.getElementById(`height-${i}`).value
-          );
-          const quantity = parseInt(
-            document.getElementById(`quantity-${i}`).value
-          );
-
-          const effectiveWidth = width + gap;
-          const effectiveHeight = height + gap;
-
-          // Calculate designs per row based on 24 inch width
-          const designsPerRow = Math.floor(maxWidth / effectiveWidth);
-
-          // Calculate rows needed
-          const rowsNeeded = Math.ceil(quantity / designsPerRow);
-
-          const designHeight = Math.min(
-            rowsNeeded * effectiveHeight - gap,
-            maxHeight
-          );
-          totalHeight += designHeight;
-
-          let designResultText = `Design Height: ${designHeight.toFixed(
-            2
-          )} inches\n`;
-          designResultText += `Designs per Row: ${designsPerRow}\n`;
-
-          document.getElementById(`design-result-${i}`).innerText =
-            designResultText;
-        });
-
-        const roundedTotalHeight = Math.min(Math.ceil(totalHeight), maxHeight);
-
-        let resultText = `Total Height: ${totalHeight.toFixed(
-          2
-        )} inches (capped at ${roundedTotalHeight} inches for 24x24 sheet)\n`;
-
-        document.getElementById("total-result").innerText = resultText;
-      }*/
+     
 
       document.addEventListener("DOMContentLoaded", () => {
         addInputListeners(1);
@@ -499,3 +451,55 @@
     </script>
   </body>
 </html>
+
+
+
+<!-- /* function calculateGangSheet() {
+  let totalHeight = 0;
+  const gap = 0.2;
+  const maxWidth = 24; // Updated to 24 inches
+  const maxHeight = 24; // Added max height
+  const designGroups = document.querySelectorAll(".design-group");
+
+  designGroups.forEach((group, index) => {
+    const i = parseInt(group.id.split("-")[2]);
+    const width = parseFloat(document.getElementById(`width-${i}`).value);
+    const height = parseFloat(
+      document.getElementById(`height-${i}`).value
+    );
+    const quantity = parseInt(
+      document.getElementById(`quantity-${i}`).value
+    );
+
+    const effectiveWidth = width + gap;
+    const effectiveHeight = height + gap;
+
+    // Calculate designs per row based on 24 inch width
+    const designsPerRow = Math.floor(maxWidth / effectiveWidth);
+
+    // Calculate rows needed
+    const rowsNeeded = Math.ceil(quantity / designsPerRow);
+
+    const designHeight = Math.min(
+      rowsNeeded * effectiveHeight - gap,
+      maxHeight
+    );
+    totalHeight += designHeight;
+
+    let designResultText = `Design Height: ${designHeight.toFixed(
+      2
+    )} inches\n`;
+    designResultText += `Designs per Row: ${designsPerRow}\n`;
+
+    document.getElementById(`design-result-${i}`).innerText =
+      designResultText;
+  });
+
+  const roundedTotalHeight = Math.min(Math.ceil(totalHeight), maxHeight);
+
+  let resultText = `Total Height: ${totalHeight.toFixed(
+    2
+  )} inches (capped at ${roundedTotalHeight} inches for 24x24 sheet)\n`;
+
+  document.getElementById("total-result").innerText = resultText;
+}*/ -->
