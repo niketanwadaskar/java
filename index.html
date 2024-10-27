@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sheet Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: #ffffff;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);
+        margin-top: 60px;
+      }
+      .page-title {
+        text-align: center;
+        color: #333;
+      }
+      .table-container {
+        margin-bottom: 30px;
+      }
+      .calculator-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      .calculator-table th,
+      .calculator-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      .calculator-table th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+        color: #333;
+      }
+      .calculator-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      .calculator-table tr:hover {
+        background-color: #f1f1f1;
+      }
+      .design-group {
+        background-color: #e9e9e9;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        position: relative;
+      }
+      .design-title {
+        color: #333;
+        margin-top: 0;
+      }
+      .input-field {
+        margin-bottom: 15px;
+      }
+      .input-field label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+      }
+      .input-field input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        background: white;
+      }
+      .error {
+        color: #d9534f;
+        font-size: 14px;
+        margin-top: 5px;
+      }
+      .add-design-btn {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        display: block;
+        margin: 20px auto;
+        transition: background-color 0.3s;
+      }
+      .add-design-btn:hover {
+        background-color: #218838;
+      }
+      .delete-button {
+        position: absolute;
+        top: 22px;
+        right: 10px;
+        padding: 5px 10px;
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: background-color 0.3s;
+      }
+      .delete-button:hover {
+        background-color: #c82333;
+      }
+      .design-result,
+      #total-result {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="page-title">Gang Sheet Size Estimator</h1>
+      <div class="table-container">
+        <table class="calculator-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Size</th>
+              <th>Instruction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Adult Left Chest</td>
+              <td>Logo Size = 4 inches wide</td>
+              <td>
+                Position logo on the left chest, ensuring it is 4 inches wide.
+              </td>
+            </tr>
+            <tr>
+              <td>Adult Full Front</td>
+              <td>Up to = 11 inches wide</td>
+              <td>
+                Center the design on the front, with a recommended width of 11
+                inches.
+              </td>
+            </tr>
+            <tr>
+              <td>Youth</td>
+              <td>9 inches wide</td>
+              <td>
+                Center the design on the front, ensuring it is 9 inches wide.
+              </td>
+            </tr>
+            <tr>
+              <td>Toddler</td>
+              <td>6 inches wide</td>
+              <td>
+                Center the design on the front, ensuring it is 6 inches wide.
+              </td>
+            </tr>
+            <tr>
+              <td>Hat</td>
+              <td>3 inches wide</td>
+              <td>
+                Position the logo in the center front of the hat, ensuring it is
+                3 inches wide.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="design-container">
+        <div class="design-group" id="design-group-1">
+          <h2 class="design-title">1st Design</h2>
+          <div class="input-field">
+            <label for="width-1">Width (inches):</label>
+            <input
+              type="number"
+              id="width-1"
+              class="width"
+              min="0.1"
+              step="0.1"
+              required
+            />
+            <div class="error" id="width-error-1"></div>
+          </div>
+          <div class="input-field">
+            <label for="height-1">Height (inches):</label>
+            <input
+              type="number"
+              id="height-1"
+              class="height"
+              min="0.1"
+              step="0.1"
+              required
+            />
+            <div class="error" id="height-error-1"></div>
+          </div>
+          <div class="input-field">
+            <label for="quantity-1">Quantity:</label>
+            <input
+              type="number"
+              id="quantity-1"
+              class="quantity"
+              min="1"
+              step="1"
+              required
+            />
+            <div class="error" id="quantity-error-1"></div>
+          </div>
+          <div class="design-result" id="design-result-1"></div>
+        </div>
+      </div>
+      <button id="addDesign" class="add-design-btn">Add More Design</button>
+      <div id="total-result"></div>
+    </div>
+
+    <script>
+      let designCount = 1;
+
+      function addDesign() {
+        designCount++;
+        const designContainer = document.getElementById("design-container");
+        const designGroup = document.createElement("div");
+        designGroup.className = "design-group";
+        designGroup.id = `design-group-${designCount}`;
+        designGroup.innerHTML = `
+        <button class="delete-button" onclick="deleteDesign(${designCount})">Delete</button>
+        <h2 class="design-title">${ordinalSuffix(designCount)} Design</h2>
+        <div class="input-field">
+            <label for="width-${designCount}">Width (inches):</label>
+            <input type="number" id="width-${designCount}" class="width" min="0.1" step="0.1" required>
+            <div class="error" id="width-error-${designCount}"></div>
+        </div>
+        <div class="input-field">
+            <label for="height-${designCount}">Height (inches):</label>
+            <input type="number" id="height-${designCount}" class="height" min="0.1" step="0.1" required>
+            <div class="error" id="height-error-${designCount}"></div>
+        </div>
+        <div class="input-field">
+            <label for="quantity-${designCount}">Quantity:</label>
+            <input type="number" id="quantity-${designCount}" class="quantity" min="1" step="1" required>
+            <div class="error" id="quantity-error-${designCount}"></div>
+        </div>
+        <div class="design-result" id="design-result-${designCount}"></div>
+    `;
+        designContainer.appendChild(designGroup);
+        addInputListeners(designCount);
+        validateInputs();
+      }
+
+      /**
+       * Deletes a design group from the page, updates the title of the other groups
+       * and revalidates all inputs.
+       * @param {number} index The index of the design to delete.
+       */
+
+      function deleteDesign(index) {
+        const designGroup = document.getElementById(`design-group-${index}`);
+        designGroup.remove();
+        updateDesignTitles();
+        validateInputs(index);
+      }
+      function updateDesignTitles() {
+        const designGroups = document.querySelectorAll(".design-group");
+        designGroups.forEach((group, index) => {
+          // const newIndex = index + 1;  // Adjust the index to match the current order (1-based index)
+          const newIndex = parseInt(group.id.split("-")[2]);
+          console.log(newIndex, group.id, "updateDesignTitles");
+
+          // Update the title
+          const title = group.querySelector(".design-title");
+          title.textContent = `${ordinalSuffix(newIndex)} Design`;
+
+          // Update the group ID
+          group.id = `design-group-${newIndex}`;
+
+          // Update input IDs and labels
+          ["width", "height", "quantity"].forEach((field) => {
+            const input = group.querySelector(`.${field}`);
+            const label = group.querySelector(
+              `label[for="${field}-${newIndex}"]`
+            );
+            const errorElementId = `${field}-error-${newIndex}`;
+
+            if (input) {
+              input.id = `${field}-${newIndex}`;
+            }
+
+            if (label) {
+              label.setAttribute("for", `${field}-${newIndex}`);
+            }
+
+            // Update error messages only if the error element exists
+            const errorElement = document.getElementById(errorElementId);
+            if (errorElement) {
+              errorElement.innerText = ""; // Clear the error message
+            } else {
+              console.log(`Element with ID ${errorElementId} not found.`);
+            }
+          });
+
+          // Update the delete button
+          const deleteButton = group.querySelector(".delete-button");
+          if (deleteButton) {
+            deleteButton.setAttribute("onclick", `deleteDesign(${newIndex})`);
+          }
+
+          // Update design result ID
+          const designResult = group.querySelector(".design-result");
+          if (designResult) {
+            designResult.id = `design-result-${newIndex}`;
+          }
+        });
+
+        // Update the designCount to the new number of groups
+        // designCount = designGroups.length;
+      }
+
+      function ordinalSuffix(i) {
+        const j = i % 10,
+          k = i % 100;
+        if (j == 1 && k != 11) {
+          return i + "st";
+        }
+        if (j == 2 && k != 12) {
+          return i + "nd";
+        }
+        if (j == 3 && k != 13) {
+          return i + "rd";
+        }
+        return i + "th";
+      }
+
+      function validateInputs() {
+        let isValid = true;
+        const designGroups = document.querySelectorAll(".design-group");
+        console.log(designGroups, designGroups.length);
+        designGroups.forEach((group, index) => {
+          const newIndex = index + 1; // New index after deletion
+          const i = parseInt(group.id.split("-")[2]);
+          console.log(i, group.id, "validateInputs");
+
+          const widthInput = document.getElementById(`width-${i}`);
+          const heightInput = document.getElementById(`height-${i}`);
+          const quantityInput = document.getElementById(`quantity-${i}`);
+
+          // Reset error messages
+          document.getElementById(`width-error-${i}`).innerText = "";
+          document.getElementById(`height-error-${i}`).innerText = "";
+          document.getElementById(`quantity-error-${i}`).innerText = "";
+
+          if (widthInput && heightInput && quantityInput) {
+            const width = parseFloat(widthInput.value);
+            const height = parseFloat(heightInput.value);
+            const quantity = parseInt(quantityInput.value);
+
+            if (isNaN(width) || width <= 0 || width > 22) {
+              document.getElementById(`width-error-${i}`).innerText =
+                "Please enter a valid width (0.1-22 inches).";
+              isValid = false;
+            }
+            if (isNaN(height) || height <= 0) {
+              document.getElementById(`height-error-${i}`).innerText =
+                "Please enter a valid height (> 0 inches).";
+              isValid = false;
+            }
+            if (isNaN(quantity) || quantity <= 0) {
+              document.getElementById(`quantity-error-${i}`).innerText =
+                "Please enter a valid quantity (>= 1).";
+              isValid = false;
+            }
+          }
+        });
+
+        if (isValid) {
+          calculateGangSheet();
+        } else {
+          document.getElementById("total-result").innerText = "";
+        }
+      }
+
+      function addInputListeners(designIndex) {
+        document
+          .getElementById(`width-${designIndex}`)
+          .addEventListener("input", validateInputs);
+        document
+          .getElementById(`height-${designIndex}`)
+          .addEventListener("input", validateInputs);
+        document
+          .getElementById(`quantity-${designIndex}`)
+          .addEventListener("input", validateInputs);
+      }
+
+      // function calculateGangSheet() {
+      //   let totalHeight = 0;
+      //   const gap = 0.2;
+      //   const designGroups = document.querySelectorAll(".design-group");
+
+      //   designGroups.forEach((group, index) => {
+      //     // const i = index + 1;
+      //     const i = parseInt(group.id.split("-")[2]);
+      //     console.log(i, group.id, "calculateGangSheet");
+      //     const width = parseFloat(document.getElementById(`width-${i}`).value);
+      //     const height = parseFloat(
+      //       document.getElementById(`height-${i}`).value
+      //     );
+      //     const quantity = parseInt(
+      //       document.getElementById(`quantity-${i}`).value
+      //     );
+
+      //     const effectiveWidth = width + gap;
+      //     const effectiveHeight = height + gap;
+
+      //     const designsPerRow = Math.floor(22 / effectiveWidth);
+      //     const rowsNeeded = Math.ceil(quantity / designsPerRow);
+
+      //     const designHeight = rowsNeeded * effectiveHeight - gap;
+      //     totalHeight += designHeight;
+
+      //     let designResultText = `Design Height: ${designHeight.toFixed(
+      //       2
+      //     )} inches\n`;
+      //     designResultText += `Designs per Row: ${designsPerRow}\n`;
+
+      //     document.getElementById(`design-result-${i}`).innerText =
+      //       designResultText;
+      //   });
+
+      //   const roundedTotalHeight = Math.ceil(totalHeight / 12) * 12;
+
+      //   let resultText = `Total Height: ${totalHeight.toFixed(
+      //     2
+      //   )} inches (rounded to ${roundedTotalHeight} inches for calculation)\n`;
+
+      //   document.getElementById("total-result").innerText = resultText;
+      // }
+
+      function calculateGangSheet() {
+        let totalHeight = 0;
+        const gap = 0.2;
+        const maxWidth = 24; // Updated to 24 inches
+        const maxHeight = 24; // Added max height
+        const designGroups = document.querySelectorAll(".design-group");
+
+        designGroups.forEach((group, index) => {
+          const i = parseInt(group.id.split("-")[2]);
+          const width = parseFloat(document.getElementById(`width-${i}`).value);
+          const height = parseFloat(
+            document.getElementById(`height-${i}`).value
+          );
+          const quantity = parseInt(
+            document.getElementById(`quantity-${i}`).value
+          );
+
+          const effectiveWidth = width + gap;
+          const effectiveHeight = height + gap;
+
+          // Calculate designs per row based on 24 inch width
+          const designsPerRow = Math.floor(maxWidth / effectiveWidth);
+
+          // Calculate rows needed
+          const rowsNeeded = Math.ceil(quantity / designsPerRow);
+
+          const designHeight = Math.min(
+            rowsNeeded * effectiveHeight - gap,
+            maxHeight
+          );
+          totalHeight += designHeight;
+
+          let designResultText = `Design Height: ${designHeight.toFixed(
+            2
+          )} inches\n`;
+          designResultText += `Designs per Row: ${designsPerRow}\n`;
+
+          document.getElementById(`design-result-${i}`).innerText =
+            designResultText;
+        });
+
+        const roundedTotalHeight = Math.min(Math.ceil(totalHeight), maxHeight);
+
+        let resultText = `Total Height: ${totalHeight.toFixed(
+          2
+        )} inches (capped at ${roundedTotalHeight} inches for 24x24 sheet)\n`;
+
+        document.getElementById("total-result").innerText = resultText;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        addInputListeners(1);
+        document
+          .getElementById("addDesign")
+          .addEventListener("click", addDesign);
+      });
+    </script>
+  </body>
+</html>
